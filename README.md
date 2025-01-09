@@ -44,13 +44,19 @@ Sometimes you need to run an application that does not elevate itself, for this 
     invoke-ascurrentuser -NonElevatedSession -scriptblock $scriptblock
 
 When you want to capture the output of your script invoked as the user then use the -CaptureOutput switch:
-$scriptblock = { "Hello world" }
-invoke-ascurrentuser -scriptblock $scriptblock -CaptureOutput
+
+    $scriptblock = { "Hello world" }
+    invoke-ascurrentuser -scriptblock $scriptblock -CaptureOutput
 
 If you are executing in a context that results in a "Win32ErrorCode 5" access denied you may need to set the -Breakaway switch. 
-The -Breakaway switch will start the process with CREATE_BREAKAWAY_FROM_JOB which starts the process outside any [job]https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects the caller may be in.
+The -Breakaway switch will start the process with CREATE_BREAKAWAY_FROM_JOB which starts the process outside any [job](https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects) the caller may be in.
 
-**Examples:**
+# Note:
+
+If using ScreenConnect BackStage, please make sure you run "Invoke-RunAsUser" in a script.
+Running this command does not work in an interactive PowerShell session.
+
+# Examples:
 
 To get the OneDrive files in the currently logged on user profile:
 
